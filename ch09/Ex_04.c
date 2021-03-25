@@ -12,17 +12,22 @@ typedef struct stackDS
 
 int push(stackDS_t *stack, char *item)
 {
+	int top = stack->top;
+        printf("Push %c \n",*item);
 	if(stack->top >= stack->size)
 		return 0;
-	*(stack->data+stack->top) = *item;
-	stack->top++;
+	stack->data = item;
+	stack->data += top;
+	top++;
+	stack->top = top;
+
 }
 
 int pop(stackDS_t *stack)
 {
 	if(stack->top == 0)
 		return 0;
-	*(stack->data+stack->top) = '0';
+	*(stack->data) = '0';
 	stack->top--;
 }
 
@@ -30,7 +35,7 @@ char* peek(stackDS_t *stack)
 {
 	if((stack->top) == 0)
 		return 0;
-	return (stack->data+stack->top);
+	return (stack->data);
 
 }
 
